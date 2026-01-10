@@ -2,8 +2,6 @@
 
 Aplikasi **Portfolio** ini adalah migrasi dari website PHP Native ke framework **Laravel 11**, yang dirancang untuk menampilkan profil biodata mahasiswa, riwayat pendidikan, organisasi, keahlian, dan showcase proyek-proyek yang telah dikerjakan.
 
-![Preview Home](public/images/profil.png)
-*(Ganti gambar ini dengan screenshot halaman home jika sudah tersedia)*
 
 ## 🚀 Fitur
 
