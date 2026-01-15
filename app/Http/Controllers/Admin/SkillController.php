@@ -21,9 +21,17 @@ class SkillController extends Controller
     public function store(\Illuminate\Http\Request $request)
     {
         $request->validate([
-            'nama_keahlian' => 'required',
-            'deskripsi' => 'nullable',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'nama_keahlian' => 'required|string|max:100|unique:tbkeahlian_23312240,nama_keahlian',
+            'kategori_23312240' => 'required|string',
+            'deskripsi' => 'required|string',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            'nama_keahlian.required' => 'Nama keahlian wajib diisi.',
+            'nama_keahlian.unique' => 'Nama keahlian sudah ada, harap gunakan nama lain.',
+            'kategori_23312240.required' => 'Kategori wajib dipilih.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'icon.required' => 'Icon wajib diupload.',
+            'icon.image' => 'File harus berupa gambar.',
         ]);
 
         $data = $request->except(['icon']);
@@ -48,9 +56,16 @@ class SkillController extends Controller
     public function update(\Illuminate\Http\Request $request, \App\Models\Skill $skill)
     {
         $request->validate([
-            'nama_keahlian' => 'required',
-            'deskripsi' => 'nullable',
+            'nama_keahlian' => 'required|string|max:100|unique:tbkeahlian_23312240,nama_keahlian,' . $skill->id_keahlian . ',id_keahlian',
+            'kategori_23312240' => 'required|string',
+            'deskripsi' => 'required|string',
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            'nama_keahlian.required' => 'Nama keahlian wajib diisi.',
+            'nama_keahlian.unique' => 'Nama keahlian sudah ada, harap gunakan nama lain.',
+            'kategori_23312240.required' => 'Kategori wajib dipilih.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'icon.image' => 'File harus berupa gambar.',
         ]);
 
         $data = $request->except(['icon']);

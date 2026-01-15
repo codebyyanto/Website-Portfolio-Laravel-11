@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    protected $table = 'tbproyek_23312240';
+    protected $primaryKey = 'id_proyek';
+
     protected $fillable = [
         'nama_proyek',
         'tahun_proyek',

@@ -3,15 +3,25 @@
 @section('title', 'Admin - Daftar Proyek')
 
 @section('content')
-<div class="container mx-auto px-4 pt-24 pb-8">
-    <!-- Header & Add Button -->
-    <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-slate-100">Kelola Proyek</h1>
-        <div class="space-x-4">
-            <a href="{{ route('admin.skills.index') }}" class="text-slate-400 hover:text-slate-200 transition-colors">
-                <i class="fas fa-star mr-1"></i> Kelola Keahlian
+<div class="max-w-7xl mx-auto px-4 pt-24 pb-12">
+    <!-- Admin Navigation / Header -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+        <div>
+            <div class="flex items-center gap-3 text-sm text-slate-400 mb-2">
+                <a href="{{ route('home') }}" class="hover:text-blue-400 transition-colors"><i class="fas fa-home"></i> Home</a>
+                <span>/</span>
+                <span class="text-slate-200">Admin Dashboard</span>
+            </div>
+            <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                Kelola Proyek
+            </h1>
+        </div>
+        
+        <div class="flex items-center gap-3">
+             <a href="{{ route('admin.skills.index') }}" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition-all">
+                <i class="fas fa-star mr-2 text-emerald-400"></i> Kelola Keahlian
             </a>
-            <a href="{{ route('admin.projects.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+            <a href="{{ route('admin.projects.create') }}" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all transform hover:scale-105">
                 <i class="fas fa-plus mr-2"></i> Tambah Proyek
             </a>
         </div>
@@ -57,9 +67,9 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 text-center space-x-2">
-                            <a href="{{ route('projects.show', $project->id) }}" class="text-blue-400 hover:text-blue-300" title="Lihat"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('admin.projects.edit', $project->id) }}" class="text-yellow-400 hover:text-yellow-300" title="Edit"><i class="fas fa-edit"></i></a>
-                            <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus proyek ini?');">
+                            <a href="{{ route('projects.show', $project->id_proyek) }}" class="text-blue-400 hover:text-blue-300" title="Lihat"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('admin.projects.edit', $project->id_proyek) }}" class="text-yellow-400 hover:text-yellow-300" title="Edit"><i class="fas fa-edit"></i></a>
+                            <form action="{{ route('admin.projects.destroy', $project->id_proyek) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus proyek ini?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-400 hover:text-red-300" title="Hapus"><i class="fas fa-trash"></i></button>

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skills', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_keahlian');
+        Schema::create('tbkeahlian_23312240', function (Blueprint $table) {
+            $table->id('id_keahlian');
+            $table->string('nama_keahlian', 100);
             $table->text('deskripsi')->nullable();
             $table->string('icon_path')->nullable();
-            $table->enum('status', ['Tampil', 'Tidak Tampil'])->default('Tampil');
+            $table->enum('status', ['Tampil', 'Sembunyi'])->default('Tampil');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('tbkeahlian_23312240');
     }
 };

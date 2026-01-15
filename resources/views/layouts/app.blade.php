@@ -35,6 +35,7 @@
     <div id="overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden"></div>
 
     <div class="flex min-h-screen">
+        @unless(request()->is('admin*'))
         <!-- Sidebar -->
         <aside id="sidebar" class="sidebar-glass w-64 fixed top-0 left-0 h-screen overflow-y-auto z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
             <div class="p-6 border-b border-slate-700/50 text-center">
@@ -82,36 +83,46 @@
                 </ul>
             </nav>
         </aside>
+        @endunless
 
         <!-- Main Content -->
-        <main class="flex-1 md:ml-64 min-h-screen">
-            @yield('content')
+        <!-- Main Content -->
+        <main class="flex-1 {{ request()->is('admin*') ? '' : 'md:ml-64' }} min-h-screen flex flex-col relative">
+            <div class="flex-grow w-full">
+                @yield('content')
+            </div>
+            
+            <!-- Footer (Inside Main) -->
+            <x-footer />
         </main>
     </div>
 
     <!-- Footer -->
-    <x-footer />
+
 
     <script>
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
+        const overlay = document.getElementById('overlay');
         const menuLinks = document.querySelectorAll('.menu-link');
 
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('translate-x-0');
-            overlay.classList.toggle('hidden');
-            
-            const icon = menuToggle.querySelector('i');
-            if (sidebar.classList.contains('translate-x-0')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('translate-x-0');
+                overlay.classList.toggle('hidden');
+                
+                const icon = menuToggle.querySelector('i');
+                if (sidebar.classList.contains('translate-x-0')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
 
         overlay.addEventListener('click', () => {
             sidebar.classList.remove('translate-x-0');

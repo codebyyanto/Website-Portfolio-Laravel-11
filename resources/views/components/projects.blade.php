@@ -25,7 +25,7 @@
                     <p class="text-slate-400 mb-4"><strong class="text-slate-300">Tim:</strong> {{ $project->tim_pengembang }}</p>
                 @endif
                 <p class="text-slate-500">
-                    <a href="{{ route('projects.show', $project->id) }}" class="text-slate-400 hover:text-slate-200 transition-colors duration-300">
+                    <a href="{{ route('projects.show', $project->id_proyek) }}" class="text-slate-400 hover:text-slate-200 transition-colors duration-300">
                         <i class="fas fa-external-link-alt mr-2"></i> Detail Proyek &gt;&gt;
                     </a>
                 </p>

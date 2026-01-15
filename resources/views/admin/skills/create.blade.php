@@ -12,33 +12,50 @@
         <div class="bg-slate-900/60 rounded-3xl border border-slate-700/50 p-8">
             <h1 class="text-2xl font-bold text-slate-100 mb-6 pb-4 border-b border-slate-700">Tambah Keahlian Baru</h1>
 
-            @if ($errors->any())
-                <div class="bg-red-500/10 border border-red-500 text-red-500 px-4 py-3 rounded-lg mb-6">
-                    <ul class="list-disc list-inside">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
 
             <form action="{{ route('admin.skills.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 
                 <div>
                     <label class="block text-slate-400 mb-2">Nama Keahlian</label>
-                    <input type="text" name="nama_keahlian" value="{{ old('nama_keahlian') }}" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500" required>
+                    <input type="text" name="nama_keahlian" value="{{ old('nama_keahlian') }}" class="w-full bg-slate-800 border @error('nama_keahlian') border-red-500 @else border-slate-600 @enderror rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500" required>
+                    @error('nama_keahlian')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label class="block text-slate-400 mb-2">Kategori</label>
+                    <select name="kategori_23312240" class="w-full bg-slate-800 border @error('kategori_23312240') border-red-500 @else border-slate-600 
+                    @enderror rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        @foreach(['Programming Language', 'Web Development', 
+                        'Mobile Development', 'Database', 'UI/UX Design',
+                        'Desain Grafis dan Multimedia', 'Jaringan', 'Data Analis'] as $kategori)
+                            <option value="{{ $kategori }}" {{ old('kategori_23312240') == $kategori ? 'selected' : '' }}>{{ $kategori }}</option>
+                        @endforeach
+                    </select>
+                    @error('kategori_23312240')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
                     <label class="block text-slate-400 mb-2">Deskripsi</label>
-                    <textarea name="deskripsi" rows="3" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500">{{ old('deskripsi') }}</textarea>
+                    <textarea name="deskripsi" rows="3" class="w-full bg-slate-800 border @error('deskripsi') border-red-500 @else border-slate-600 @enderror rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500">{{ old('deskripsi') }}</textarea>
+                    @error('deskripsi')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
                     <label class="block text-slate-400 mb-2">Icon (Optional)</label>
-                    <input type="file" name="icon" accept="image/*" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-slate-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
+                    <input type="file" name="icon" accept="image/*" class="w-full bg-slate-800 border @error('icon') border-red-500 @else border-slate-600 @enderror rounded-lg px-4 py-2 text-slate-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
                     <small class="text-slate-500 block mt-1">Format: JPG, PNG, SVG. Max: 2MB.</small>
+                    @error('icon')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="flex justify-end pt-4">
